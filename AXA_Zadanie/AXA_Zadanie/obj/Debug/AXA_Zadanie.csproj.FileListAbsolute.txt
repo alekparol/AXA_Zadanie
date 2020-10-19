@@ -1,0 +1,13 @@
+C:\Users\Aleksander.Parol\Documents\GitHub\AXA_Zadanie\AXA_ZADANIE\AXA_Zadanie\bin\Debug\AXA_Zadanie.exe.config
+C:\Users\Aleksander.Parol\Documents\GitHub\AXA_Zadanie\AXA_ZADANIE\AXA_Zadanie\bin\Debug\AXA_Zadanie.exe
+C:\Users\Aleksander.Parol\Documents\GitHub\AXA_Zadanie\AXA_ZADANIE\AXA_Zadanie\bin\Debug\AXA_Zadanie.pdb
+C:\Users\Aleksander.Parol\Documents\GitHub\AXA_Zadanie\AXA_ZADANIE\AXA_Zadanie\bin\Debug\SeleniumExtras.PageObjects.dll
+C:\Users\Aleksander.Parol\Documents\GitHub\AXA_Zadanie\AXA_ZADANIE\AXA_Zadanie\bin\Debug\WebDriver.dll
+C:\Users\Aleksander.Parol\Documents\GitHub\AXA_Zadanie\AXA_ZADANIE\AXA_Zadanie\bin\Debug\WebDriver.Support.dll
+C:\Users\Aleksander.Parol\Documents\GitHub\AXA_Zadanie\AXA_ZADANIE\AXA_Zadanie\bin\Debug\WebDriver.xml
+C:\Users\Aleksander.Parol\Documents\GitHub\AXA_Zadanie\AXA_ZADANIE\AXA_Zadanie\bin\Debug\WebDriver.Support.xml
+C:\Users\Aleksander.Parol\Documents\GitHub\AXA_Zadanie\AXA_ZADANIE\AXA_Zadanie\obj\Debug\AXA_Zadanie.csprojAssemblyReference.cache
+C:\Users\Aleksander.Parol\Documents\GitHub\AXA_Zadanie\AXA_ZADANIE\AXA_Zadanie\obj\Debug\AXA_Zadanie.csproj.CoreCompileInputs.cache
+C:\Users\Aleksander.Parol\Documents\GitHub\AXA_Zadanie\AXA_ZADANIE\AXA_Zadanie\obj\Debug\AXA_Zadanie.csproj.CopyComplete
+C:\Users\Aleksander.Parol\Documents\GitHub\AXA_Zadanie\AXA_ZADANIE\AXA_Zadanie\obj\Debug\AXA_Zadanie.exe
+C:\Users\Aleksander.Parol\Documents\GitHub\AXA_Zadanie\AXA_ZADANIE\AXA_Zadanie\obj\Debug\AXA_Zadanie.pdb
