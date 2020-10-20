@@ -17,15 +17,27 @@ namespace AXA_ZADANIE_TESTY
     [TestClass]
     public class Zadanie_Testy
     {
+
+
+        [TestCleanup()]
+        public void TestCleanup()
+        {
+        }
+
+
+        [DataTestMethod]
+        [DataRow("Chrome","walk","Chłodna 51", "Plac Defilad 1", 40, 3)]
+        [DataRow("Chrome","bike", "Chłodna 51", "Plac Defilad 1", 15, 3)]
+        [DataRow("Chrome", "walk", "Plac Defilad 1", "Chłodna 51", 40, 3)]
+        [DataRow("Chrome", "bike", "Plac Defilad 1", "Chłodna 51", 15, 3)]
         [TestMethod]
-        public void Zadanie_1_A()
+        public void Zadanie(string browserType, string mode, string endpoint_1, string endpoint_2, int maximalDuration, int maximalDistance)
         {
 
-            IWebDriver driver = new ChromeDriver();
-            driver.Manage().Window.Maximize();
-            
-            /* Przejście do strony testowej */
-            driver.Navigate().GoToUrl("https://www.google.pl/maps/");
+            var driver1 = new DriverFactory(browserType);
+            driver1.LoadApplication("https://www.google.pl/maps/");
+
+            IWebDriver driver = driver1.driver;
 
             /* Zgoda na przetwarzanie informacji przez Google */
             AgreementsPopUp agreementPopUp = new AgreementsPopUp(driver);
@@ -37,7 +49,14 @@ namespace AXA_ZADANIE_TESTY
 
             /* Inicjalizacja podwójnego search boxa i wprowadzenie dwóch adresów pod kątem trasy pieszej */
             SearchDirections searchDirections = new SearchDirections(driver);
-            searchDirections.SearchRouteForWalk("Chłodna 51", "Plac Defilad 1");
+            if (mode == "walk")
+            {
+                searchDirections.SearchRouteForWalk(endpoint_1, endpoint_2);
+            }
+            else if (mode == "bike")
+            {
+                searchDirections.SearchRouteForBike(endpoint_1, endpoint_2);
+            }
 
             /* Inicjalizacja listy tras i pobranie informacji o najszybszej dla trasy pieszej */
             RoutesList routeList = new RoutesList(driver);
@@ -47,118 +66,10 @@ namespace AXA_ZADANIE_TESTY
 
             /* Sprawdzenie warunków testów dla trasy pieszej */
 
-            Assert.IsTrue(fastestsRouteDuration < 40, "The fastests route exceeds required time limit. Expected outcome: < 40 min. Actual outcome: {0} min", fastestsRouteDuration);
-            Assert.IsTrue(fastestsRouteDistance < 3, "The fastests route exceeds required distance limit. Expected outcome: < 3 km. Actual outcome: {0} km", fastestsRouteDistance);
+            Assert.IsTrue(fastestsRouteDuration < maximalDuration, "The fastests route exceeds required time limit. Expected outcome: < {0} min. Actual outcome: {1} min", maximalDuration, fastestsRouteDuration);
+            Assert.IsTrue(fastestsRouteDistance < maximalDistance, "The fastests route exceeds required distance limit. Expected outcome: < {0} km. Actual outcome: {1} km", maximalDistance, fastestsRouteDistance);
 
-            driver.Quit();
-        }
-
-        [TestMethod]
-        public void Zadanie_1_B()
-        {
-
-            IWebDriver driver = new ChromeDriver();
-            driver.Manage().Window.Maximize();
-
-            /* Przejście do strony testowej */
-            driver.Navigate().GoToUrl("https://www.google.pl/maps/");
-
-            /* Zgoda na przetwarzanie informacji przez Google */
-            AgreementsPopUp agreementPopUp = new AgreementsPopUp(driver);
-            agreementPopUp.ClickAgree();
-
-            /* Inicjalizacja search boxa i przejście do trybu wyznaczania trasy */
-            SearchBox googleSearchBox = new SearchBox(driver);
-            googleSearchBox.ClickDriectionButton();
-
-            /* Inicjalizacja podwójnego search boxa i wprowadzenie dwóch adresów pod kątem trasy rowerowej */
-            SearchDirections searchDirections = new SearchDirections(driver);
-            searchDirections.SearchRouteForBike("Chłodna 51", "Plac Defilad 1");
-
-            /* Inicjalizacja listy tras i pobranie informacji o najszybszej dla jazdy rowerem */
-            RoutesList routeList = new RoutesList(driver);
-
-            float fastestsRouteDistance = routeList.ReturnRouteDistance();
-            int  fastestsRouteDuration = routeList.ReturnRouteDuration();
-
-            /* Sprawdzenie warunków testów dla jazdy rowerem */
-
-            Assert.IsTrue(fastestsRouteDuration < 15, "The fastests route exceeds required time limit. Expected outcome: < 40 min. Actual outcome: {0} min", fastestsRouteDuration);
-            Assert.IsTrue(fastestsRouteDistance < 3, "The fastests route exceeds required distance limit. Expected outcome: < 3 km. Actual outcome: {0} km", fastestsRouteDistance);
-
-            driver.Quit();
-        }
-
-        [TestMethod]
-        public void Zadanie_2_A()
-        {
-
-            IWebDriver driver = new ChromeDriver();
-            driver.Manage().Window.Maximize();
-
-            /* Przejście do strony testowej */
-            driver.Navigate().GoToUrl("https://www.google.pl/maps/");
-
-            /* Zgoda na przetwarzanie informacji przez Google */
-            AgreementsPopUp agreementPopUp = new AgreementsPopUp(driver);
-            agreementPopUp.ClickAgree();
-
-            /* Inicjalizacja search boxa i przejście do trybu wyznaczania trasy */
-            SearchBox googleSearchBox = new SearchBox(driver);
-            googleSearchBox.ClickDriectionButton();
-
-            /* Inicjalizacja podwójnego search boxa i wprowadzenie dwóch adresów pod kątem trasy pieszej */
-            SearchDirections searchDirections = new SearchDirections(driver);
-            searchDirections.SearchRouteForWalk("Plac Defilad 1", "Chłodna 51");
-
-            /* Inicjalizacja listy tras i pobranie informacji o najszybszej dla trasy pieszej */
-            RoutesList routeList = new RoutesList(driver);
-
-            float fastestsRouteDistance = routeList.ReturnRouteDistance();
-            int fastestsRouteDuration = routeList.ReturnRouteDuration();
-
-            /* Sprawdzenie warunków testów dla trasy pieszej */
-
-            Assert.IsTrue(fastestsRouteDuration < 40, "The fastests route exceeds required time limit. Expected outcome: < 40 min. Actual outcome: {0} min", fastestsRouteDuration);
-            Assert.IsTrue(fastestsRouteDistance < 3, "The fastests route exceeds required distance limit. Expected outcome: < 3 km. Actual outcome: {0} km", fastestsRouteDistance);
-
-            driver.Quit();
-        }
-
-        [TestMethod]
-        public void Zadanie_2_B()
-        {
-
-            IWebDriver driver = new ChromeDriver();
-            driver.Manage().Window.Maximize();
-
-            /* Przejście do strony testowej */
-            driver.Navigate().GoToUrl("https://www.google.pl/maps/");
-
-            /* Zgoda na przetwarzanie informacji przez Google */
-            AgreementsPopUp agreementPopUp = new AgreementsPopUp(driver);
-            agreementPopUp.ClickAgree();
-
-            /* Inicjalizacja search boxa i przejście do trybu wyznaczania trasy */
-            SearchBox googleSearchBox = new SearchBox(driver);
-            googleSearchBox.ClickDriectionButton();
-
-            /* Inicjalizacja podwójnego search boxa i wprowadzenie dwóch adresów pod kątem trasy rowerowej */
-            SearchDirections searchDirections = new SearchDirections(driver);
-            searchDirections.SearchRouteForBike("Plac Defilad 1", "Chłodna 51");
-
-            /* Inicjalizacja listy tras i pobranie informacji o najszybszej dla jazdy rowerem */
-            RoutesList routeList = new RoutesList(driver);
-
-            float fastestsRouteDistance = routeList.ReturnRouteDistance();
-            int fastestsRouteDuration = routeList.ReturnRouteDuration();
-
-            /* Sprawdzenie warunków testów dla jazdy rowerem */
-
-            Assert.IsTrue(fastestsRouteDuration < 15, "The fastests route exceeds required time limit. Expected outcome: < 40 min. Actual outcome: {0} min", fastestsRouteDuration);
-            Assert.IsTrue(fastestsRouteDistance < 3, "The fastests route exceeds required distance limit. Expected outcome: < 3 km. Actual outcome: {0} km", fastestsRouteDistance);
-
-            driver.Quit();
+            driver1.CloseAllDrivers();
         }
     }
 }

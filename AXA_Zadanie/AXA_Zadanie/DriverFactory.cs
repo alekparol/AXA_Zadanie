@@ -14,11 +14,9 @@ namespace AXA_Zadanie
 {
     public class DriverFactory
     {
+        public IWebDriver driver;
 
-        private static readonly IDictionary<string, IWebDriver> Drivers = new Dictionary<string, IWebDriver>();
-        public static IWebDriver driver;
-
-        public static IWebDriver Driver
+        public IWebDriver Driver
         {
             get
             {
@@ -34,7 +32,7 @@ namespace AXA_Zadanie
             }
         }
 
-        public static void InitBrowser(string browserName)
+        public DriverFactory(string browserName)
         {
             switch (browserName)
             {
@@ -42,7 +40,6 @@ namespace AXA_Zadanie
                     if (driver == null)
                     {
                         driver = new FirefoxDriver();
-                        Drivers.Add("Firefox", driver);
                     }
                     break;
 
@@ -50,24 +47,20 @@ namespace AXA_Zadanie
                     if (driver == null)
                     {
                         driver = new ChromeDriver();
-                        Drivers.Add("Chrome", driver);
                     }
                     break;
             }
         }
 
-        public static void LoadApplication(string url)
+        public void LoadApplication(string url)
         {
+            driver.Manage().Window.Maximize();
             driver.Url = url;
         }
 
-        public static void CloseAllDrivers()
+        public void CloseAllDrivers()
         {
-            foreach (var key in Drivers.Keys)
-            {
-                Drivers[key].Close();
-                Drivers[key].Quit();
-            }
+            driver.Quit();
         }
 
     }

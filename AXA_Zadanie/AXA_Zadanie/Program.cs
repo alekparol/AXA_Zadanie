@@ -17,7 +17,7 @@ namespace AXA_Zadanie
         static void Main(string[] args)
         {
 
-            DriverFactory.InitBrowser("Firefox");
+            /*DriverFactory.InitBrowser("Firefox");
             DriverFactory.LoadApplication("https://www.google.pl/maps/");
 
             DriverFactory.Driver.Manage().Window.Maximize();
@@ -50,7 +50,7 @@ namespace AXA_Zadanie
             Console.WriteLine(rl.ReturnRouteDistance());
             Console.WriteLine(rl.ReturnRouteDuration());
 
-            DriverFactory.CloseAllDrivers();
+            DriverFactory.CloseAllDrivers();*/
 
         }
 	}
