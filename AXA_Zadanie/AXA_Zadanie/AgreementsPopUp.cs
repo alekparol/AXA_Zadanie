@@ -37,9 +37,9 @@ namespace AXA_Zadanie
             this.driver = driver;
             var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(60));
 
-            wait.Until(ExpectedConditions.ElementIsVisible(By.ClassName("widget-consent-frame")));
+            wait.Until(ExpectedConditions.ElementIsVisible(By.XPath("//*[@class=\"widget-consent-frame\"]")));
 
-            driver.SwitchTo().Frame(driver.FindElement(By.ClassName("widget-consent-frame")));
+            driver.SwitchTo().Frame(driver.FindElement(By.XPath("//*[@class=\"widget-consent-frame\"]")));
             PageFactory.InitElements(this, new RetryingElementLocator(driver, TimeSpan.FromSeconds(20)));
         }
 

@@ -17,14 +17,21 @@ namespace AXA_Zadanie
         static void Main(string[] args)
         {
 
-            IWebDriver driver = new ChromeDriver();
-            driver.Manage().Window.Maximize();
+            DriverFactory.InitBrowser("Firefox");
+            DriverFactory.LoadApplication("https://www.google.pl/maps/");
 
-            driver.Navigate().GoToUrl("https://www.google.pl/maps/");
+            DriverFactory.Driver.Manage().Window.Maximize();
+            IWebDriver driver = DriverFactory.Driver;
+
+            Thread.Sleep(3000);
 
             AgreementsPopUp ag = new AgreementsPopUp(driver);
             ag.ClickAgree();
-            
+
+            Thread.Sleep(3000);
+            driver.SwitchTo().ParentFrame();
+
+
             SearchBox ne = new SearchBox(driver);
             
             ne.ClickDriectionButton();
@@ -43,8 +50,7 @@ namespace AXA_Zadanie
             Console.WriteLine(rl.ReturnRouteDistance());
             Console.WriteLine(rl.ReturnRouteDuration());
 
-            Thread.Sleep(20000);
-            driver.Quit();
+            DriverFactory.CloseAllDrivers();
 
         }
 	}

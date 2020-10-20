@@ -39,7 +39,7 @@ namespace AXA_Zadanie
             this.driver = driver;
             var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(60));
             
-            wait.Until(ExpectedConditions.ElementIsVisible(By.XPath("//div[@role=\"region\"]")));
+            wait.Until(ExpectedConditions.ElementIsVisible(By.Id("//div[@role=\"region\"]")));
             PageFactory.InitElements(this, new RetryingElementLocator(driver, TimeSpan.FromSeconds(20)));
         }
 
