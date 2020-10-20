@@ -28,6 +28,9 @@ namespace AXA_Zadanie
         [FindsBy(How = How.XPath, Using = "//*[@aria-label=\"Pieszo\"]")]
         public IWebElement ModeByWalk { get; set; }
 
+        [FindsBy(How = How.XPath, Using = "//*[@aria-label=\"Na rowerze\"]")]
+        public IWebElement ModeByBike { get; set; }
+
         [FindsBy(How = How.XPath, Using = "//*[@id=\"directions-searchbox-1\"]//button[@aria-label=\"Szukaj\"]")]
         public IWebElement SearchButton { get; set; }
 
@@ -36,6 +39,11 @@ namespace AXA_Zadanie
         public void ChoseModeByWalk()
         {
             ModeByWalk.Click();
+        }
+
+        public void ChoseModeByBike()
+        {
+            ModeByBike.Click();
         }
 
         public void TypeStart(string endpointAddress)
@@ -55,9 +63,17 @@ namespace AXA_Zadanie
             SearchButton.Click();
         }
 
-        public void SearchRoute(string endpointAddress_1, string endpointAddress_2)
+        public void SearchRouteForWalk(string endpointAddress_1, string endpointAddress_2)
         {
             ChoseModeByWalk();
+            TypeStart(endpointAddress_1);
+            TypeEnd(endpointAddress_2);
+            SearchButtonClick();
+        }
+
+        public void SearchRouteForBike(string endpointAddress_1, string endpointAddress_2)
+        {
+            ChoseModeByBike();
             TypeStart(endpointAddress_1);
             TypeEnd(endpointAddress_2);
             SearchButtonClick();

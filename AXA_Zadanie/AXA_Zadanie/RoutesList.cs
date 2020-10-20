@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace AXA_Zadanie
 {
-    class RoutesList
+    public class RoutesList
     {
 
         /* Fields */

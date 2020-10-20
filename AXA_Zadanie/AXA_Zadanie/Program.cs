@@ -30,9 +30,16 @@ namespace AXA_Zadanie
             ne.ClickDriectionButton();
 
             SearchDirections sd = new SearchDirections(driver);
-            sd.SearchRoute("Chłodna 51", "Plac Defilad 1");
+            sd.SearchRouteForWalk("Chłodna 51", "Plac Defilad 1");
 
             RoutesList rl = new RoutesList(driver);
+            Console.WriteLine(rl.ReturnRouteDistance());
+            Console.WriteLine(rl.ReturnRouteDuration());
+
+            sd = new SearchDirections(driver);
+            sd.ChoseModeByBike();
+
+            rl = new RoutesList(driver);
             Console.WriteLine(rl.ReturnRouteDistance());
             Console.WriteLine(rl.ReturnRouteDuration());
 
