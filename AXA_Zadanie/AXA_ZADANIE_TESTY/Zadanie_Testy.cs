@@ -18,13 +18,6 @@ namespace AXA_ZADANIE_TESTY
     public class Zadanie_Testy
     {
 
-
-        [TestCleanup()]
-        public void TestCleanup()
-        {
-        }
-
-
         [DataTestMethod]
         [DataRow("Chrome","walk","Chłodna 51", "Plac Defilad 1", 40, 3)]
         [DataRow("Chrome","bike", "Chłodna 51", "Plac Defilad 1", 15, 3)]
@@ -33,11 +26,12 @@ namespace AXA_ZADANIE_TESTY
         [TestMethod]
         public void Zadanie(string browserType, string mode, string endpoint_1, string endpoint_2, int maximalDuration, int maximalDistance)
         {
+            /* Inicjalizacja testu */
 
-            var driver1 = new DriverFactory(browserType);
-            driver1.LoadApplication("https://www.google.pl/maps/");
+            var _driver_ = new DriverFactory(browserType);
+            _driver_.LoadApplication("https://www.google.pl/maps/");
 
-            IWebDriver driver = driver1.driver;
+            IWebDriver driver = _driver_.driver;
 
             /* Zgoda na przetwarzanie informacji przez Google */
             AgreementsPopUp agreementPopUp = new AgreementsPopUp(driver);
@@ -47,7 +41,7 @@ namespace AXA_ZADANIE_TESTY
             SearchBox googleSearchBox = new SearchBox(driver);
             googleSearchBox.ClickDriectionButton();
 
-            /* Inicjalizacja podwójnego search boxa i wprowadzenie dwóch adresów pod kątem trasy pieszej */
+            /* Inicjalizacja podwójnego search boxa i wprowadzenie dwóch adresów pod kątem trasy (pieszej lub rowerowej) */
             SearchDirections searchDirections = new SearchDirections(driver);
             if (mode == "walk")
             {
@@ -58,18 +52,18 @@ namespace AXA_ZADANIE_TESTY
                 searchDirections.SearchRouteForBike(endpoint_1, endpoint_2);
             }
 
-            /* Inicjalizacja listy tras i pobranie informacji o najszybszej dla trasy pieszej */
+            /* Inicjalizacja listy tras i pobranie informacji o najszybszej dla trasy (pieszej lub rowerowej) */
             RoutesList routeList = new RoutesList(driver);
 
             float fastestsRouteDistance = routeList.ReturnRouteDistance();
             int fastestsRouteDuration = routeList.ReturnRouteDuration();
 
-            /* Sprawdzenie warunków testów dla trasy pieszej */
+            /* Sprawdzenie warunków testów dla trasy (pieszej lub rowerowej) */
 
             Assert.IsTrue(fastestsRouteDuration < maximalDuration, "The fastests route exceeds required time limit. Expected outcome: < {0} min. Actual outcome: {1} min", maximalDuration, fastestsRouteDuration);
             Assert.IsTrue(fastestsRouteDistance < maximalDistance, "The fastests route exceeds required distance limit. Expected outcome: < {0} km. Actual outcome: {1} km", maximalDistance, fastestsRouteDistance);
 
-            driver1.CloseAllDrivers();
+            _driver_.CloseAllDrivers();
         }
     }
 }
