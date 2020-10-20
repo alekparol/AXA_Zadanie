@@ -1,6 +1,7 @@
 ﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Firefox;
+using OpenQA.Selenium.Support.UI;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,11 +18,15 @@ namespace AXA_Zadanie
         {
 
             IWebDriver driver = new ChromeDriver();
-            driver.Navigate().GoToUrl("https://www.google.pl/maps/preview");
+            driver.Manage().Window.Maximize();
 
-            Thread.Sleep(20000);
+            driver.Navigate().GoToUrl("https://www.google.pl/maps/");
 
+            AgreementsPopUp ag = new AgreementsPopUp(driver);
+            ag.ClickAgree();
+            
             SearchBox ne = new SearchBox(driver);
+            
             ne.ClickDriectionButton();
 
             Thread.Sleep(2000);
