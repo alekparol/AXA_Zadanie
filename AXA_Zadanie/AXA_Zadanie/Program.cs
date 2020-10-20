@@ -29,7 +29,14 @@ namespace AXA_Zadanie
             
             ne.ClickDriectionButton();
 
-            Thread.Sleep(2000);
+            SearchDirections sd = new SearchDirections(driver);
+            sd.SearchRoute("Chłodna 51", "Plac Defilad 1");
+
+            RoutesList rl = new RoutesList(driver);
+            Console.WriteLine(rl.ReturnRouteDistance());
+            Console.WriteLine(rl.ReturnRouteDuration());
+
+            Thread.Sleep(20000);
             driver.Quit();
 
         }

@@ -58,7 +58,9 @@
     <Compile Include="AgreementsPopUp.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RoutesList.cs" />
     <Compile Include="SearchBox.cs" />
+    <Compile Include="SearchDirections.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
